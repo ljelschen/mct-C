@@ -12,8 +12,6 @@ void startConversion(){
 }
  //Timer1 Overflow
 ISR(TIMER1_COMPA_vect){
-	// global interrupts enable
-	sei(); 
 	//umrechen von Analog Wert in Grad
 	angle = (analogWert/1024)  * 180; 
 	// einstellen von PWM-Signal mit Grad
@@ -21,8 +19,6 @@ ISR(TIMER1_COMPA_vect){
 }
 //ADC fertig mit Auslesen
 ISR(ADC_vect){ 
-	// global interrupts enable
-	sei(); 
 	// analogwert in Variable speichern
 	analogWert = ADC; 
 }
@@ -42,14 +38,14 @@ int main(void){
 	 //PWM Pins as Output
 	DDRB|=0xFF;  
 	//0 degree (Startwert setzen)
-	OCR1A= 2000 + ((2000/180) * angle);  
+	OCR1A= 1000 + ((4200/180) * angle);  
 	//interrupt OCR1A setzen
 	TIMSK1 = (1<<OCIE1A); 
 	
 	// ADC einstellungen
 	//(A5) und externe REF - Spannung
 	ADMUX = (1 << REFS0) | (1 << MUX0) | (1 << MUX2); 
-	// Enable - ADC Interrupt - ADC Prescaler auf 4 (Was macht der Prescaler ?)
+	// Enable - ADC Interrupt - ADC Prescaler auf 4
 	ADCSRA = (1 << ADEN) | (1 << ADIE) | (1 << ADPS1); 
 	// Input aktivieren (A5)
 	DIDR0 = (1 << ADC5D); 

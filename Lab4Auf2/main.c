@@ -11,15 +11,11 @@ void startConversion(){
 }
 //Timer0 Overflow
 ISR(TIMER0_OVF_vect){
-	//global interrupt an
-	sei(); 
 	//OCR0A für die länge des PWM-Signal setzen (255 entsprechen 8 Bit)
 	OCR0A = (analogWert/1024) * 255; 
 }
 //ADC fertig mit Auslesen
 ISR(ADC_vect){ 
-	//global interrupt an
-	sei();
 	// Analog Wert in einer Variable speichern
 	analogWert = ADC;
 	// ADC Wert auslesen
@@ -37,7 +33,7 @@ int main(void){
 	TIMSK0 = (1 << TOIE0); 
 	 //(A5) und externe REF - Spannung
 	ADMUX = (1 << REFS0) | (1 << MUX0) | (1 << MUX2);
-	 // Enable - ADC Interrupt - ADC Prescaler auf 4 (Was macht der Prescaler ?)
+	 // Enable - ADC Interrupt - ADC Prescaler auf 4
 	ADCSRA = (1 << ADEN) | (1 << ADIE) | (1 << ADPS1);
 	 // Input aktivieren (A5)
 	DIDR0 = (1 << ADC5D);
