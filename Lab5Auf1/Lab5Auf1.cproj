@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>Lab4Auf3</AssemblyName>
-    <Name>Lab4Auf3</Name>
-    <RootNamespace>Lab4Auf3</RootNamespace>
+    <AssemblyName>Lab5Auf1</AssemblyName>
+    <Name>Lab5Auf1</Name>
+    <RootNamespace>Lab5Auf1</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>

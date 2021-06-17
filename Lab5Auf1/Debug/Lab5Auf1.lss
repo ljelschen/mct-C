@@ -1,0 +1,623 @@
+
+Lab5Auf1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  0000058a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000516  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000002  00800100  00800100  0000058a  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000058a  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000005bc  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000130  00000000  00000000  000005fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00001388  00000000  00000000  0000072c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000007cc  00000000  00000000  00001ab4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000971  00000000  00000000  00002280  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000002c0  00000000  00000000  00002bf4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000005d3  00000000  00000000  00002eb4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000896  00000000  00000000  00003487  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000120  00000000  00000000  00003d1d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 38 02 	jmp	0x470	; 0x470 <__vector_1>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a2 30       	cpi	r26, 0x02	; 2
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 63 02 	call	0x4c6	; 0x4c6 <main>
+  88:	0c 94 89 02 	jmp	0x512	; 0x512 <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <TWIInit>:
+uint8_t DS3231GetTenYear(void) {
+	uint8_t u8data;	
+	u8data = DS3231ReadDataFrom(0x06);
+	u8data = (u8data >> 4);
+	return u8data;
+}
+  90:	10 92 b9 00 	sts	0x00B9, r1	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+  94:	88 e4       	ldi	r24, 0x48	; 72
+  96:	80 93 b8 00 	sts	0x00B8, r24	; 0x8000b8 <__TEXT_REGION_LENGTH__+0x7f80b8>
+  9a:	84 e0       	ldi	r24, 0x04	; 4
+  9c:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  a0:	80 e2       	ldi	r24, 0x20	; 32
+  a2:	84 b9       	out	0x04, r24	; 4
+  a4:	08 95       	ret
+
+000000a6 <TWIStart>:
+  a6:	15 b8       	out	0x05, r1	; 5
+  a8:	84 ea       	ldi	r24, 0xA4	; 164
+  aa:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  ae:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  b2:	88 23       	and	r24, r24
+  b4:	e4 f7       	brge	.-8      	; 0xae <TWIStart+0x8>
+  b6:	08 95       	ret
+
+000000b8 <TWIStop>:
+  b8:	84 e9       	ldi	r24, 0x94	; 148
+  ba:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  be:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  c2:	84 fd       	sbrc	r24, 4
+  c4:	fc cf       	rjmp	.-8      	; 0xbe <TWIStop+0x6>
+  c6:	08 95       	ret
+
+000000c8 <TWIWrite>:
+  c8:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+  cc:	84 e8       	ldi	r24, 0x84	; 132
+  ce:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  d2:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  d6:	88 23       	and	r24, r24
+  d8:	e4 f7       	brge	.-8      	; 0xd2 <TWIWrite+0xa>
+  da:	08 95       	ret
+
+000000dc <TWIReadNACK>:
+  dc:	84 e8       	ldi	r24, 0x84	; 132
+  de:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  e2:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  e6:	88 23       	and	r24, r24
+  e8:	e4 f7       	brge	.-8      	; 0xe2 <TWIReadNACK+0x6>
+  ea:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+  ee:	08 95       	ret
+
+000000f0 <TWIGetStatus>:
+  f0:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+  f4:	88 7f       	andi	r24, 0xF8	; 248
+  f6:	08 95       	ret
+
+000000f8 <TWIError>:
+  f8:	80 e2       	ldi	r24, 0x20	; 32
+  fa:	85 b9       	out	0x05, r24	; 5
+  fc:	0e 94 5c 00 	call	0xb8	; 0xb8 <TWIStop>
+ 100:	08 95       	ret
+
+00000102 <decimal_to_bcd>:
+ 102:	9d ec       	ldi	r25, 0xCD	; 205
+ 104:	89 9f       	mul	r24, r25
+ 106:	91 2d       	mov	r25, r1
+ 108:	11 24       	eor	r1, r1
+ 10a:	96 95       	lsr	r25
+ 10c:	96 95       	lsr	r25
+ 10e:	96 95       	lsr	r25
+ 110:	39 2f       	mov	r19, r25
+ 112:	33 0f       	add	r19, r19
+ 114:	23 2f       	mov	r18, r19
+ 116:	22 0f       	add	r18, r18
+ 118:	22 0f       	add	r18, r18
+ 11a:	23 0f       	add	r18, r19
+ 11c:	82 1b       	sub	r24, r18
+ 11e:	20 e1       	ldi	r18, 0x10	; 16
+ 120:	92 9f       	mul	r25, r18
+ 122:	80 0d       	add	r24, r0
+ 124:	11 24       	eor	r1, r1
+ 126:	08 95       	ret
+
+00000128 <DS3231StartOsc>:
+ 128:	0e 94 53 00 	call	0xa6	; 0xa6 <TWIStart>
+ 12c:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 130:	88 30       	cpi	r24, 0x08	; 8
+ 132:	11 f0       	breq	.+4      	; 0x138 <DS3231StartOsc+0x10>
+ 134:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 138:	80 ed       	ldi	r24, 0xD0	; 208
+ 13a:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 13e:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 142:	88 31       	cpi	r24, 0x18	; 24
+ 144:	11 f0       	breq	.+4      	; 0x14a <DS3231StartOsc+0x22>
+ 146:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 14a:	8e e0       	ldi	r24, 0x0E	; 14
+ 14c:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 150:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 154:	88 32       	cpi	r24, 0x28	; 40
+ 156:	11 f0       	breq	.+4      	; 0x15c <DS3231StartOsc+0x34>
+ 158:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 15c:	80 e0       	ldi	r24, 0x00	; 0
+ 15e:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 162:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 166:	88 32       	cpi	r24, 0x28	; 40
+ 168:	11 f0       	breq	.+4      	; 0x16e <DS3231StartOsc+0x46>
+ 16a:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 16e:	0e 94 5c 00 	call	0xb8	; 0xb8 <TWIStop>
+ 172:	08 95       	ret
+
+00000174 <DS3231SetTimeAndDate>:
+ 174:	9f 92       	push	r9
+ 176:	af 92       	push	r10
+ 178:	bf 92       	push	r11
+ 17a:	cf 92       	push	r12
+ 17c:	df 92       	push	r13
+ 17e:	ef 92       	push	r14
+ 180:	ff 92       	push	r15
+ 182:	0f 93       	push	r16
+ 184:	1f 93       	push	r17
+ 186:	cf 93       	push	r28
+ 188:	df 93       	push	r29
+ 18a:	cd b7       	in	r28, 0x3d	; 61
+ 18c:	de b7       	in	r29, 0x3e	; 62
+ 18e:	27 97       	sbiw	r28, 0x07	; 7
+ 190:	0f b6       	in	r0, 0x3f	; 63
+ 192:	f8 94       	cli
+ 194:	de bf       	out	0x3e, r29	; 62
+ 196:	0f be       	out	0x3f, r0	; 63
+ 198:	cd bf       	out	0x3d, r28	; 61
+ 19a:	18 2f       	mov	r17, r24
+ 19c:	b6 2e       	mov	r11, r22
+ 19e:	84 2f       	mov	r24, r20
+ 1a0:	f2 2e       	mov	r15, r18
+ 1a2:	90 ed       	ldi	r25, 0xD0	; 208
+ 1a4:	c9 1a       	sub	r12, r25
+ 1a6:	97 e0       	ldi	r25, 0x07	; 7
+ 1a8:	d9 0a       	sbc	r13, r25
+ 1aa:	0e 94 81 00 	call	0x102	; 0x102 <decimal_to_bcd>
+ 1ae:	98 2e       	mov	r9, r24
+ 1b0:	8b 2d       	mov	r24, r11
+ 1b2:	0e 94 81 00 	call	0x102	; 0x102 <decimal_to_bcd>
+ 1b6:	a8 2e       	mov	r10, r24
+ 1b8:	81 2f       	mov	r24, r17
+ 1ba:	0e 94 81 00 	call	0x102	; 0x102 <decimal_to_bcd>
+ 1be:	b8 2e       	mov	r11, r24
+ 1c0:	80 2f       	mov	r24, r16
+ 1c2:	0e 94 81 00 	call	0x102	; 0x102 <decimal_to_bcd>
+ 1c6:	d8 2e       	mov	r13, r24
+ 1c8:	8e 2d       	mov	r24, r14
+ 1ca:	0e 94 81 00 	call	0x102	; 0x102 <decimal_to_bcd>
+ 1ce:	18 2f       	mov	r17, r24
+ 1d0:	8c 2d       	mov	r24, r12
+ 1d2:	0e 94 81 00 	call	0x102	; 0x102 <decimal_to_bcd>
+ 1d6:	99 82       	std	Y+1, r9	; 0x01
+ 1d8:	aa 82       	std	Y+2, r10	; 0x02
+ 1da:	bb 82       	std	Y+3, r11	; 0x03
+ 1dc:	fc 82       	std	Y+4, r15	; 0x04
+ 1de:	dd 82       	std	Y+5, r13	; 0x05
+ 1e0:	1e 83       	std	Y+6, r17	; 0x06
+ 1e2:	8f 83       	std	Y+7, r24	; 0x07
+ 1e4:	0e 94 53 00 	call	0xa6	; 0xa6 <TWIStart>
+ 1e8:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 1ec:	88 30       	cpi	r24, 0x08	; 8
+ 1ee:	11 f0       	breq	.+4      	; 0x1f4 <DS3231SetTimeAndDate+0x80>
+ 1f0:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 1f4:	80 ed       	ldi	r24, 0xD0	; 208
+ 1f6:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 1fa:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 1fe:	88 31       	cpi	r24, 0x18	; 24
+ 200:	11 f0       	breq	.+4      	; 0x206 <DS3231SetTimeAndDate+0x92>
+ 202:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 206:	80 e0       	ldi	r24, 0x00	; 0
+ 208:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 20c:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 210:	88 32       	cpi	r24, 0x28	; 40
+ 212:	11 f0       	breq	.+4      	; 0x218 <DS3231SetTimeAndDate+0xa4>
+ 214:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 218:	10 e0       	ldi	r17, 0x00	; 0
+ 21a:	10 c0       	rjmp	.+32     	; 0x23c <DS3231SetTimeAndDate+0xc8>
+ 21c:	e1 e0       	ldi	r30, 0x01	; 1
+ 21e:	f0 e0       	ldi	r31, 0x00	; 0
+ 220:	ec 0f       	add	r30, r28
+ 222:	fd 1f       	adc	r31, r29
+ 224:	e1 0f       	add	r30, r17
+ 226:	f1 1d       	adc	r31, r1
+ 228:	80 81       	ld	r24, Z
+ 22a:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 22e:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 232:	88 32       	cpi	r24, 0x28	; 40
+ 234:	11 f0       	breq	.+4      	; 0x23a <DS3231SetTimeAndDate+0xc6>
+ 236:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 23a:	1f 5f       	subi	r17, 0xFF	; 255
+ 23c:	18 30       	cpi	r17, 0x08	; 8
+ 23e:	70 f3       	brcs	.-36     	; 0x21c <DS3231SetTimeAndDate+0xa8>
+ 240:	0e 94 5c 00 	call	0xb8	; 0xb8 <TWIStop>
+ 244:	27 96       	adiw	r28, 0x07	; 7
+ 246:	0f b6       	in	r0, 0x3f	; 63
+ 248:	f8 94       	cli
+ 24a:	de bf       	out	0x3e, r29	; 62
+ 24c:	0f be       	out	0x3f, r0	; 63
+ 24e:	cd bf       	out	0x3d, r28	; 61
+ 250:	df 91       	pop	r29
+ 252:	cf 91       	pop	r28
+ 254:	1f 91       	pop	r17
+ 256:	0f 91       	pop	r16
+ 258:	ff 90       	pop	r15
+ 25a:	ef 90       	pop	r14
+ 25c:	df 90       	pop	r13
+ 25e:	cf 90       	pop	r12
+ 260:	bf 90       	pop	r11
+ 262:	af 90       	pop	r10
+ 264:	9f 90       	pop	r9
+ 266:	08 95       	ret
+
+00000268 <DS3231ReadDataFrom>:
+ 268:	cf 93       	push	r28
+ 26a:	c8 2f       	mov	r28, r24
+ 26c:	0e 94 53 00 	call	0xa6	; 0xa6 <TWIStart>
+ 270:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 274:	88 30       	cpi	r24, 0x08	; 8
+ 276:	11 f0       	breq	.+4      	; 0x27c <DS3231ReadDataFrom+0x14>
+ 278:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 27c:	80 ed       	ldi	r24, 0xD0	; 208
+ 27e:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 282:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 286:	88 31       	cpi	r24, 0x18	; 24
+ 288:	11 f0       	breq	.+4      	; 0x28e <DS3231ReadDataFrom+0x26>
+ 28a:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 28e:	8c 2f       	mov	r24, r28
+ 290:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 294:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 298:	88 32       	cpi	r24, 0x28	; 40
+ 29a:	11 f0       	breq	.+4      	; 0x2a0 <DS3231ReadDataFrom+0x38>
+ 29c:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 2a0:	0e 94 53 00 	call	0xa6	; 0xa6 <TWIStart>
+ 2a4:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 2a8:	80 31       	cpi	r24, 0x10	; 16
+ 2aa:	11 f0       	breq	.+4      	; 0x2b0 <DS3231ReadDataFrom+0x48>
+ 2ac:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 2b0:	81 ed       	ldi	r24, 0xD1	; 209
+ 2b2:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 2b6:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 2ba:	80 34       	cpi	r24, 0x40	; 64
+ 2bc:	11 f0       	breq	.+4      	; 0x2c2 <DS3231ReadDataFrom+0x5a>
+ 2be:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 2c2:	0e 94 6e 00 	call	0xdc	; 0xdc <TWIReadNACK>
+ 2c6:	c8 2f       	mov	r28, r24
+ 2c8:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 2cc:	88 35       	cpi	r24, 0x58	; 88
+ 2ce:	11 f0       	breq	.+4      	; 0x2d4 <DS3231ReadDataFrom+0x6c>
+ 2d0:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 2d4:	0e 94 5c 00 	call	0xb8	; 0xb8 <TWIStop>
+ 2d8:	8c 2f       	mov	r24, r28
+ 2da:	cf 91       	pop	r28
+ 2dc:	08 95       	ret
+
+000002de <DS3231WriteDataTo>:
+ 2de:	cf 93       	push	r28
+ 2e0:	df 93       	push	r29
+ 2e2:	d8 2f       	mov	r29, r24
+ 2e4:	c6 2f       	mov	r28, r22
+ 2e6:	0e 94 53 00 	call	0xa6	; 0xa6 <TWIStart>
+ 2ea:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 2ee:	88 30       	cpi	r24, 0x08	; 8
+ 2f0:	11 f0       	breq	.+4      	; 0x2f6 <DS3231WriteDataTo+0x18>
+ 2f2:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 2f6:	80 ed       	ldi	r24, 0xD0	; 208
+ 2f8:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 2fc:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 300:	88 31       	cpi	r24, 0x18	; 24
+ 302:	11 f0       	breq	.+4      	; 0x308 <DS3231WriteDataTo+0x2a>
+ 304:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 308:	8d 2f       	mov	r24, r29
+ 30a:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 30e:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 312:	88 32       	cpi	r24, 0x28	; 40
+ 314:	11 f0       	breq	.+4      	; 0x31a <DS3231WriteDataTo+0x3c>
+ 316:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 31a:	8c 2f       	mov	r24, r28
+ 31c:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 320:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 324:	88 32       	cpi	r24, 0x28	; 40
+ 326:	11 f0       	breq	.+4      	; 0x32c <DS3231WriteDataTo+0x4e>
+ 328:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 32c:	0e 94 5c 00 	call	0xb8	; 0xb8 <TWIStop>
+ 330:	df 91       	pop	r29
+ 332:	cf 91       	pop	r28
+ 334:	08 95       	ret
+
+00000336 <EnableIntSqwt>:
+ 336:	8e e0       	ldi	r24, 0x0E	; 14
+ 338:	0e 94 34 01 	call	0x268	; 0x268 <DS3231ReadDataFrom>
+ 33c:	68 2f       	mov	r22, r24
+ 33e:	64 60       	ori	r22, 0x04	; 4
+ 340:	8e e0       	ldi	r24, 0x0E	; 14
+ 342:	0e 94 6f 01 	call	0x2de	; 0x2de <DS3231WriteDataTo>
+ 346:	08 95       	ret
+
+00000348 <getBitFromRegister>:
+ 348:	61 11       	cpse	r22, r1
+ 34a:	02 c0       	rjmp	.+4      	; 0x350 <getBitFromRegister+0x8>
+ 34c:	81 70       	andi	r24, 0x01	; 1
+ 34e:	08 95       	ret
+ 350:	61 30       	cpi	r22, 0x01	; 1
+ 352:	11 f4       	brne	.+4      	; 0x358 <getBitFromRegister+0x10>
+ 354:	82 70       	andi	r24, 0x02	; 2
+ 356:	08 95       	ret
+ 358:	62 30       	cpi	r22, 0x02	; 2
+ 35a:	11 f4       	brne	.+4      	; 0x360 <getBitFromRegister+0x18>
+ 35c:	84 70       	andi	r24, 0x04	; 4
+ 35e:	08 95       	ret
+ 360:	63 30       	cpi	r22, 0x03	; 3
+ 362:	11 f4       	brne	.+4      	; 0x368 <getBitFromRegister+0x20>
+ 364:	88 70       	andi	r24, 0x08	; 8
+ 366:	08 95       	ret
+ 368:	64 30       	cpi	r22, 0x04	; 4
+ 36a:	11 f4       	brne	.+4      	; 0x370 <getBitFromRegister+0x28>
+ 36c:	80 71       	andi	r24, 0x10	; 16
+ 36e:	08 95       	ret
+ 370:	65 30       	cpi	r22, 0x05	; 5
+ 372:	11 f4       	brne	.+4      	; 0x378 <getBitFromRegister+0x30>
+ 374:	80 72       	andi	r24, 0x20	; 32
+ 376:	08 95       	ret
+ 378:	66 30       	cpi	r22, 0x06	; 6
+ 37a:	11 f4       	brne	.+4      	; 0x380 <getBitFromRegister+0x38>
+ 37c:	80 74       	andi	r24, 0x40	; 64
+ 37e:	08 95       	ret
+ 380:	67 30       	cpi	r22, 0x07	; 7
+ 382:	11 f4       	brne	.+4      	; 0x388 <getBitFromRegister+0x40>
+ 384:	80 78       	andi	r24, 0x80	; 128
+ 386:	08 95       	ret
+ 388:	80 e0       	ldi	r24, 0x00	; 0
+ 38a:	08 95       	ret
+
+0000038c <SetAlarm1Rate>:
+ 38c:	0f 93       	push	r16
+ 38e:	1f 93       	push	r17
+ 390:	cf 93       	push	r28
+ 392:	df 93       	push	r29
+ 394:	c8 2f       	mov	r28, r24
+ 396:	60 e0       	ldi	r22, 0x00	; 0
+ 398:	0e 94 a4 01 	call	0x348	; 0x348 <getBitFromRegister>
+ 39c:	08 2f       	mov	r16, r24
+ 39e:	07 95       	ror	r16
+ 3a0:	00 27       	eor	r16, r16
+ 3a2:	07 95       	ror	r16
+ 3a4:	61 e0       	ldi	r22, 0x01	; 1
+ 3a6:	8c 2f       	mov	r24, r28
+ 3a8:	0e 94 a4 01 	call	0x348	; 0x348 <getBitFromRegister>
+ 3ac:	18 2f       	mov	r17, r24
+ 3ae:	17 95       	ror	r17
+ 3b0:	11 27       	eor	r17, r17
+ 3b2:	17 95       	ror	r17
+ 3b4:	62 e0       	ldi	r22, 0x02	; 2
+ 3b6:	8c 2f       	mov	r24, r28
+ 3b8:	0e 94 a4 01 	call	0x348	; 0x348 <getBitFromRegister>
+ 3bc:	d8 2f       	mov	r29, r24
+ 3be:	d7 95       	ror	r29
+ 3c0:	dd 27       	eor	r29, r29
+ 3c2:	d7 95       	ror	r29
+ 3c4:	63 e0       	ldi	r22, 0x03	; 3
+ 3c6:	8c 2f       	mov	r24, r28
+ 3c8:	0e 94 a4 01 	call	0x348	; 0x348 <getBitFromRegister>
+ 3cc:	c8 2f       	mov	r28, r24
+ 3ce:	c7 95       	ror	r28
+ 3d0:	cc 27       	eor	r28, r28
+ 3d2:	c7 95       	ror	r28
+ 3d4:	0e 94 53 00 	call	0xa6	; 0xa6 <TWIStart>
+ 3d8:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 3dc:	88 30       	cpi	r24, 0x08	; 8
+ 3de:	11 f0       	breq	.+4      	; 0x3e4 <SetAlarm1Rate+0x58>
+ 3e0:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 3e4:	80 ed       	ldi	r24, 0xD0	; 208
+ 3e6:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 3ea:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 3ee:	88 31       	cpi	r24, 0x18	; 24
+ 3f0:	11 f0       	breq	.+4      	; 0x3f6 <SetAlarm1Rate+0x6a>
+ 3f2:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 3f6:	87 e0       	ldi	r24, 0x07	; 7
+ 3f8:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 3fc:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 400:	88 32       	cpi	r24, 0x28	; 40
+ 402:	11 f0       	breq	.+4      	; 0x408 <__EEPROM_REGION_LENGTH__+0x8>
+ 404:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 408:	80 2f       	mov	r24, r16
+ 40a:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 40e:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 412:	88 32       	cpi	r24, 0x28	; 40
+ 414:	11 f0       	breq	.+4      	; 0x41a <__EEPROM_REGION_LENGTH__+0x1a>
+ 416:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 41a:	81 2f       	mov	r24, r17
+ 41c:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 420:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 424:	88 32       	cpi	r24, 0x28	; 40
+ 426:	11 f0       	breq	.+4      	; 0x42c <__EEPROM_REGION_LENGTH__+0x2c>
+ 428:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 42c:	8d 2f       	mov	r24, r29
+ 42e:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 432:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 436:	88 32       	cpi	r24, 0x28	; 40
+ 438:	11 f0       	breq	.+4      	; 0x43e <__EEPROM_REGION_LENGTH__+0x3e>
+ 43a:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 43e:	8c 2f       	mov	r24, r28
+ 440:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIWrite>
+ 444:	0e 94 78 00 	call	0xf0	; 0xf0 <TWIGetStatus>
+ 448:	88 32       	cpi	r24, 0x28	; 40
+ 44a:	11 f0       	breq	.+4      	; 0x450 <__EEPROM_REGION_LENGTH__+0x50>
+ 44c:	0e 94 7c 00 	call	0xf8	; 0xf8 <TWIError>
+ 450:	0e 94 5c 00 	call	0xb8	; 0xb8 <TWIStop>
+ 454:	df 91       	pop	r29
+ 456:	cf 91       	pop	r28
+ 458:	1f 91       	pop	r17
+ 45a:	0f 91       	pop	r16
+ 45c:	08 95       	ret
+
+0000045e <EnableAlarm1>:
+ 45e:	8e e0       	ldi	r24, 0x0E	; 14
+ 460:	0e 94 34 01 	call	0x268	; 0x268 <DS3231ReadDataFrom>
+ 464:	68 2f       	mov	r22, r24
+ 466:	61 60       	ori	r22, 0x01	; 1
+ 468:	8e e0       	ldi	r24, 0x0E	; 14
+ 46a:	0e 94 6f 01 	call	0x2de	; 0x2de <DS3231WriteDataTo>
+ 46e:	08 95       	ret
+
+00000470 <__vector_1>:
+
+int zeahler = 0;
+
+ISR(INT0_vect){
+ 470:	1f 92       	push	r1
+ 472:	0f 92       	push	r0
+ 474:	0f b6       	in	r0, 0x3f	; 63
+ 476:	0f 92       	push	r0
+ 478:	11 24       	eor	r1, r1
+ 47a:	8f 93       	push	r24
+ 47c:	9f 93       	push	r25
+
+	if(zeahler == 60){
+ 47e:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 482:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 486:	8c 33       	cpi	r24, 0x3C	; 60
+ 488:	91 05       	cpc	r25, r1
+ 48a:	29 f4       	brne	.+10     	; 0x496 <__vector_1+0x26>
+		zeahler = 0;
+ 48c:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 490:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 494:	05 c0       	rjmp	.+10     	; 0x4a0 <__vector_1+0x30>
+	}else{
+		zeahler += 1;
+ 496:	01 96       	adiw	r24, 0x01	; 1
+ 498:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 49c:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+	}
+
+	PORTD = zeahler<<3 | 1<<2;
+ 4a0:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 4a4:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 4a8:	88 0f       	add	r24, r24
+ 4aa:	99 1f       	adc	r25, r25
+ 4ac:	88 0f       	add	r24, r24
+ 4ae:	99 1f       	adc	r25, r25
+ 4b0:	88 0f       	add	r24, r24
+ 4b2:	99 1f       	adc	r25, r25
+ 4b4:	84 60       	ori	r24, 0x04	; 4
+ 4b6:	8b b9       	out	0x0b, r24	; 11
+}
+ 4b8:	9f 91       	pop	r25
+ 4ba:	8f 91       	pop	r24
+ 4bc:	0f 90       	pop	r0
+ 4be:	0f be       	out	0x3f, r0	; 63
+ 4c0:	0f 90       	pop	r0
+ 4c2:	1f 90       	pop	r1
+ 4c4:	18 95       	reti
+
+000004c6 <main>:
+
+int main(void)
+{
+	SetAlarm1Rate(0x0F);
+ 4c6:	8f e0       	ldi	r24, 0x0F	; 15
+ 4c8:	0e 94 c6 01 	call	0x38c	; 0x38c <SetAlarm1Rate>
+	TWIInit();
+ 4cc:	0e 94 48 00 	call	0x90	; 0x90 <TWIInit>
+    DS3231StartOsc();
+ 4d0:	0e 94 94 00 	call	0x128	; 0x128 <DS3231StartOsc>
+	uint8_t h = 12;
+	uint8_t date = 1; // SUNDAY
+	uint8_t month = 6; //JUNE
+	uint8_t year = 21;
+	uint8_t dayOfWeek = 7;
+	DS3231SetTimeAndDate(h, m, s, dayOfWeek, date, month, year);
+ 4d4:	0f 2e       	mov	r0, r31
+ 4d6:	f5 e1       	ldi	r31, 0x15	; 21
+ 4d8:	cf 2e       	mov	r12, r31
+ 4da:	d1 2c       	mov	r13, r1
+ 4dc:	f0 2d       	mov	r31, r0
+ 4de:	0f 2e       	mov	r0, r31
+ 4e0:	f6 e0       	ldi	r31, 0x06	; 6
+ 4e2:	ef 2e       	mov	r14, r31
+ 4e4:	f0 2d       	mov	r31, r0
+ 4e6:	01 e0       	ldi	r16, 0x01	; 1
+ 4e8:	27 e0       	ldi	r18, 0x07	; 7
+ 4ea:	4c e0       	ldi	r20, 0x0C	; 12
+ 4ec:	6c e0       	ldi	r22, 0x0C	; 12
+ 4ee:	8c e0       	ldi	r24, 0x0C	; 12
+ 4f0:	0e 94 ba 00 	call	0x174	; 0x174 <DS3231SetTimeAndDate>
+	EnableIntSqwt();
+ 4f4:	0e 94 9b 01 	call	0x336	; 0x336 <EnableIntSqwt>
+
+	EnableAlarm1();
+ 4f8:	0e 94 2f 02 	call	0x45e	; 0x45e <EnableAlarm1>
+	
+	DDRD = 0xF8; // PIN D2 To input & PIN 3 - 7 to Output
+ 4fc:	88 ef       	ldi	r24, 0xF8	; 248
+ 4fe:	8a b9       	out	0x0a, r24	; 10
+	PORTD = 1<<2; // Pullup at Interruptpin
+ 500:	84 e0       	ldi	r24, 0x04	; 4
+ 502:	8b b9       	out	0x0b, r24	; 11
+	EICRA = 1<<1; // INT0 at Falling edge
+ 504:	82 e0       	ldi	r24, 0x02	; 2
+ 506:	80 93 69 00 	sts	0x0069, r24	; 0x800069 <__TEXT_REGION_LENGTH__+0x7f8069>
+	EIMSK = 1<<0; //enable interrupt mask
+ 50a:	81 e0       	ldi	r24, 0x01	; 1
+ 50c:	8d bb       	out	0x1d, r24	; 29
+	sei();
+ 50e:	78 94       	sei
+ 510:	ff cf       	rjmp	.-2      	; 0x510 <main+0x4a>
+
+00000512 <_exit>:
+ 512:	f8 94       	cli
+
+00000514 <__stop_program>:
+ 514:	ff cf       	rjmp	.-2      	; 0x514 <__stop_program>
