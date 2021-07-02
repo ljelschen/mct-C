@@ -12,7 +12,10 @@ main.d main.o: .././main.c \
  f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
  f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\twi.h \
- .././TWIPrimitives.h
+ f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
+ f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
+ f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
+ .././TWIPrimitives.c .././TWIPrimitives.h .././DS3231.c .././DS3231.h
 
 f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -40,4 +43,16 @@ f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
 f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\twi.h:
 
+f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
+
+f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
+
+f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
+
+.././TWIPrimitives.c:
+
 .././TWIPrimitives.h:
+
+.././DS3231.c:
+
+.././DS3231.h:

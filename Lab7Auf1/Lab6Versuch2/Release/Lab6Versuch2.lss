@@ -1,0 +1,790 @@
+
+Lab6Versuch2.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000004  00800100  000006ae  00000742  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000006ae  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000007  00800104  00800104  00000746  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000746  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000778  2**2
+                  CONTENTS, READONLY
+  5 .debug_info   000005f4  00000000  00000000  000007b8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000005a2  00000000  00000000  00000dac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000134  00000000  00000000  0000134e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000208  00000000  00000000  00001482  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ee ea       	ldi	r30, 0xAE	; 174
+  7c:	f6 e0       	ldi	r31, 0x06	; 6
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	a4 30       	cpi	r26, 0x04	; 4
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	a4 e0       	ldi	r26, 0x04	; 4
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	ab 30       	cpi	r26, 0x0B	; 11
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 f8 02 	call	0x5f0	; 0x5f0 <main>
+  9e:	0c 94 55 03 	jmp	0x6aa	; 0x6aa <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <lcd_enable>:
+  a6:	5d 9a       	sbi	0x0b, 5	; 11
+  a8:	8a e6       	ldi	r24, 0x6A	; 106
+  aa:	8a 95       	dec	r24
+  ac:	f1 f7       	brne	.-4      	; 0xaa <lcd_enable+0x4>
+  ae:	00 c0       	rjmp	.+0      	; 0xb0 <lcd_enable+0xa>
+  b0:	5d 98       	cbi	0x0b, 5	; 11
+  b2:	08 95       	ret
+
+000000b4 <lcd_out>:
+  b4:	9b b1       	in	r25, 0x0b	; 11
+  b6:	90 7f       	andi	r25, 0xF0	; 240
+  b8:	9b b9       	out	0x0b, r25	; 11
+  ba:	9b b1       	in	r25, 0x0b	; 11
+  bc:	82 95       	swap	r24
+  be:	8f 70       	andi	r24, 0x0F	; 15
+  c0:	98 2b       	or	r25, r24
+  c2:	9b b9       	out	0x0b, r25	; 11
+  c4:	0c 94 53 00 	jmp	0xa6	; 0xa6 <lcd_enable>
+
+000000c8 <TWIInit>:
+  c8:	10 92 b9 00 	sts	0x00B9, r1	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+  cc:	88 e4       	ldi	r24, 0x48	; 72
+  ce:	80 93 b8 00 	sts	0x00B8, r24	; 0x8000b8 <__TEXT_REGION_LENGTH__+0x7f80b8>
+  d2:	84 e0       	ldi	r24, 0x04	; 4
+  d4:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  d8:	08 95       	ret
+
+000000da <TWIStart>:
+  da:	84 ea       	ldi	r24, 0xA4	; 164
+  dc:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  e0:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  e4:	87 ff       	sbrs	r24, 7
+  e6:	fc cf       	rjmp	.-8      	; 0xe0 <TWIStart+0x6>
+  e8:	08 95       	ret
+
+000000ea <TWIStop>:
+  ea:	84 e9       	ldi	r24, 0x94	; 148
+  ec:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  f0:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  f4:	84 fd       	sbrc	r24, 4
+  f6:	fc cf       	rjmp	.-8      	; 0xf0 <TWIStop+0x6>
+  f8:	08 95       	ret
+
+000000fa <TWIWrite>:
+  fa:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+  fe:	84 e8       	ldi	r24, 0x84	; 132
+ 100:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 104:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 108:	87 ff       	sbrs	r24, 7
+ 10a:	fc cf       	rjmp	.-8      	; 0x104 <TWIWrite+0xa>
+ 10c:	08 95       	ret
+
+0000010e <TWIReadNACK>:
+ 10e:	84 e8       	ldi	r24, 0x84	; 132
+ 110:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 114:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 118:	87 ff       	sbrs	r24, 7
+ 11a:	fc cf       	rjmp	.-8      	; 0x114 <TWIReadNACK+0x6>
+ 11c:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+ 120:	08 95       	ret
+
+00000122 <bcd_to_decimal>:
+ 122:	98 2f       	mov	r25, r24
+ 124:	92 95       	swap	r25
+ 126:	9f 70       	andi	r25, 0x0F	; 15
+ 128:	8f 70       	andi	r24, 0x0F	; 15
+ 12a:	2a e0       	ldi	r18, 0x0A	; 10
+ 12c:	92 9f       	mul	r25, r18
+ 12e:	80 0d       	add	r24, r0
+ 130:	11 24       	eor	r1, r1
+ 132:	08 95       	ret
+
+00000134 <decimal_to_bcd>:
+ 134:	6a e0       	ldi	r22, 0x0A	; 10
+ 136:	0e 94 14 03 	call	0x628	; 0x628 <__udivmodqi4>
+ 13a:	20 e1       	ldi	r18, 0x10	; 16
+ 13c:	82 9f       	mul	r24, r18
+ 13e:	90 0d       	add	r25, r0
+ 140:	11 24       	eor	r1, r1
+ 142:	89 2f       	mov	r24, r25
+ 144:	08 95       	ret
+
+00000146 <DS3231SetTimeAndDate>:
+ 146:	af 92       	push	r10
+ 148:	bf 92       	push	r11
+ 14a:	cf 92       	push	r12
+ 14c:	df 92       	push	r13
+ 14e:	ef 92       	push	r14
+ 150:	ff 92       	push	r15
+ 152:	0f 93       	push	r16
+ 154:	1f 93       	push	r17
+ 156:	cf 93       	push	r28
+ 158:	df 93       	push	r29
+ 15a:	cd b7       	in	r28, 0x3d	; 61
+ 15c:	de b7       	in	r29, 0x3e	; 62
+ 15e:	27 97       	sbiw	r28, 0x07	; 7
+ 160:	0f b6       	in	r0, 0x3f	; 63
+ 162:	f8 94       	cli
+ 164:	de bf       	out	0x3e, r29	; 62
+ 166:	0f be       	out	0x3f, r0	; 63
+ 168:	cd bf       	out	0x3d, r28	; 61
+ 16a:	18 2f       	mov	r17, r24
+ 16c:	d6 2e       	mov	r13, r22
+ 16e:	84 2f       	mov	r24, r20
+ 170:	f2 2e       	mov	r15, r18
+ 172:	0e 94 9a 00 	call	0x134	; 0x134 <decimal_to_bcd>
+ 176:	a8 2e       	mov	r10, r24
+ 178:	8d 2d       	mov	r24, r13
+ 17a:	0e 94 9a 00 	call	0x134	; 0x134 <decimal_to_bcd>
+ 17e:	b8 2e       	mov	r11, r24
+ 180:	81 2f       	mov	r24, r17
+ 182:	0e 94 9a 00 	call	0x134	; 0x134 <decimal_to_bcd>
+ 186:	d8 2e       	mov	r13, r24
+ 188:	80 2f       	mov	r24, r16
+ 18a:	0e 94 9a 00 	call	0x134	; 0x134 <decimal_to_bcd>
+ 18e:	08 2f       	mov	r16, r24
+ 190:	8e 2d       	mov	r24, r14
+ 192:	0e 94 9a 00 	call	0x134	; 0x134 <decimal_to_bcd>
+ 196:	18 2f       	mov	r17, r24
+ 198:	80 e3       	ldi	r24, 0x30	; 48
+ 19a:	8c 0d       	add	r24, r12
+ 19c:	0e 94 9a 00 	call	0x134	; 0x134 <decimal_to_bcd>
+ 1a0:	a9 82       	std	Y+1, r10	; 0x01
+ 1a2:	ba 82       	std	Y+2, r11	; 0x02
+ 1a4:	db 82       	std	Y+3, r13	; 0x03
+ 1a6:	fc 82       	std	Y+4, r15	; 0x04
+ 1a8:	0d 83       	std	Y+5, r16	; 0x05
+ 1aa:	1e 83       	std	Y+6, r17	; 0x06
+ 1ac:	8f 83       	std	Y+7, r24	; 0x07
+ 1ae:	0e 94 6d 00 	call	0xda	; 0xda <TWIStart>
+ 1b2:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 1b6:	88 7f       	andi	r24, 0xF8	; 248
+ 1b8:	88 30       	cpi	r24, 0x08	; 8
+ 1ba:	11 f0       	breq	.+4      	; 0x1c0 <DS3231SetTimeAndDate+0x7a>
+ 1bc:	0e 94 75 00 	call	0xea	; 0xea <TWIStop>
+ 1c0:	80 ed       	ldi	r24, 0xD0	; 208
+ 1c2:	0e 94 7d 00 	call	0xfa	; 0xfa <TWIWrite>
+ 1c6:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 1ca:	88 7f       	andi	r24, 0xF8	; 248
+ 1cc:	88 31       	cpi	r24, 0x18	; 24
+ 1ce:	11 f0       	breq	.+4      	; 0x1d4 <DS3231SetTimeAndDate+0x8e>
+ 1d0:	0e 94 75 00 	call	0xea	; 0xea <TWIStop>
+ 1d4:	80 e0       	ldi	r24, 0x00	; 0
+ 1d6:	0e 94 7d 00 	call	0xfa	; 0xfa <TWIWrite>
+ 1da:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 1de:	88 7f       	andi	r24, 0xF8	; 248
+ 1e0:	88 32       	cpi	r24, 0x28	; 40
+ 1e2:	11 f0       	breq	.+4      	; 0x1e8 <DS3231SetTimeAndDate+0xa2>
+ 1e4:	0e 94 75 00 	call	0xea	; 0xea <TWIStop>
+ 1e8:	8e 01       	movw	r16, r28
+ 1ea:	0f 5f       	subi	r16, 0xFF	; 255
+ 1ec:	1f 4f       	sbci	r17, 0xFF	; 255
+ 1ee:	7e 01       	movw	r14, r28
+ 1f0:	89 e0       	ldi	r24, 0x09	; 9
+ 1f2:	e8 0e       	add	r14, r24
+ 1f4:	f1 1c       	adc	r15, r1
+ 1f6:	f8 01       	movw	r30, r16
+ 1f8:	81 91       	ld	r24, Z+
+ 1fa:	8f 01       	movw	r16, r30
+ 1fc:	0e 94 7d 00 	call	0xfa	; 0xfa <TWIWrite>
+ 200:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 204:	88 7f       	andi	r24, 0xF8	; 248
+ 206:	88 32       	cpi	r24, 0x28	; 40
+ 208:	11 f0       	breq	.+4      	; 0x20e <DS3231SetTimeAndDate+0xc8>
+ 20a:	0e 94 75 00 	call	0xea	; 0xea <TWIStop>
+ 20e:	0e 15       	cp	r16, r14
+ 210:	1f 05       	cpc	r17, r15
+ 212:	89 f7       	brne	.-30     	; 0x1f6 <DS3231SetTimeAndDate+0xb0>
+ 214:	27 96       	adiw	r28, 0x07	; 7
+ 216:	0f b6       	in	r0, 0x3f	; 63
+ 218:	f8 94       	cli
+ 21a:	de bf       	out	0x3e, r29	; 62
+ 21c:	0f be       	out	0x3f, r0	; 63
+ 21e:	cd bf       	out	0x3d, r28	; 61
+ 220:	df 91       	pop	r29
+ 222:	cf 91       	pop	r28
+ 224:	1f 91       	pop	r17
+ 226:	0f 91       	pop	r16
+ 228:	ff 90       	pop	r15
+ 22a:	ef 90       	pop	r14
+ 22c:	df 90       	pop	r13
+ 22e:	cf 90       	pop	r12
+ 230:	bf 90       	pop	r11
+ 232:	af 90       	pop	r10
+ 234:	0c 94 75 00 	jmp	0xea	; 0xea <TWIStop>
+
+00000238 <DS3231ReadDataFrom>:
+ 238:	cf 93       	push	r28
+ 23a:	c8 2f       	mov	r28, r24
+ 23c:	0e 94 6d 00 	call	0xda	; 0xda <TWIStart>
+ 240:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 244:	88 7f       	andi	r24, 0xF8	; 248
+ 246:	88 30       	cpi	r24, 0x08	; 8
+ 248:	11 f0       	breq	.+4      	; 0x24e <DS3231ReadDataFrom+0x16>
+ 24a:	0e 94 75 00 	call	0xea	; 0xea <TWIStop>
+ 24e:	80 ed       	ldi	r24, 0xD0	; 208
+ 250:	0e 94 7d 00 	call	0xfa	; 0xfa <TWIWrite>
+ 254:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 258:	88 7f       	andi	r24, 0xF8	; 248
+ 25a:	88 31       	cpi	r24, 0x18	; 24
+ 25c:	11 f0       	breq	.+4      	; 0x262 <DS3231ReadDataFrom+0x2a>
+ 25e:	0e 94 75 00 	call	0xea	; 0xea <TWIStop>
+ 262:	8c 2f       	mov	r24, r28
+ 264:	0e 94 7d 00 	call	0xfa	; 0xfa <TWIWrite>
+ 268:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 26c:	88 7f       	andi	r24, 0xF8	; 248
+ 26e:	88 32       	cpi	r24, 0x28	; 40
+ 270:	11 f0       	breq	.+4      	; 0x276 <DS3231ReadDataFrom+0x3e>
+ 272:	0e 94 75 00 	call	0xea	; 0xea <TWIStop>
+ 276:	0e 94 6d 00 	call	0xda	; 0xda <TWIStart>
+ 27a:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 27e:	88 7f       	andi	r24, 0xF8	; 248
+ 280:	80 31       	cpi	r24, 0x10	; 16
+ 282:	11 f0       	breq	.+4      	; 0x288 <DS3231ReadDataFrom+0x50>
+ 284:	0e 94 75 00 	call	0xea	; 0xea <TWIStop>
+ 288:	81 ed       	ldi	r24, 0xD1	; 209
+ 28a:	0e 94 7d 00 	call	0xfa	; 0xfa <TWIWrite>
+ 28e:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 292:	88 7f       	andi	r24, 0xF8	; 248
+ 294:	80 34       	cpi	r24, 0x40	; 64
+ 296:	11 f0       	breq	.+4      	; 0x29c <DS3231ReadDataFrom+0x64>
+ 298:	0e 94 75 00 	call	0xea	; 0xea <TWIStop>
+ 29c:	0e 94 87 00 	call	0x10e	; 0x10e <TWIReadNACK>
+ 2a0:	c8 2f       	mov	r28, r24
+ 2a2:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 2a6:	88 7f       	andi	r24, 0xF8	; 248
+ 2a8:	88 35       	cpi	r24, 0x58	; 88
+ 2aa:	11 f0       	breq	.+4      	; 0x2b0 <DS3231ReadDataFrom+0x78>
+ 2ac:	0e 94 75 00 	call	0xea	; 0xea <TWIStop>
+ 2b0:	0e 94 75 00 	call	0xea	; 0xea <TWIStop>
+ 2b4:	8c 2f       	mov	r24, r28
+ 2b6:	cf 91       	pop	r28
+ 2b8:	08 95       	ret
+
+000002ba <DS3231GetSeconds>:
+ 2ba:	80 e0       	ldi	r24, 0x00	; 0
+ 2bc:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 2c0:	8f 70       	andi	r24, 0x0F	; 15
+ 2c2:	08 95       	ret
+
+000002c4 <DS3231GetMinutes>:
+ 2c4:	81 e0       	ldi	r24, 0x01	; 1
+ 2c6:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 2ca:	8f 70       	andi	r24, 0x0F	; 15
+ 2cc:	08 95       	ret
+
+000002ce <DS3231GetHours>:
+ 2ce:	82 e0       	ldi	r24, 0x02	; 2
+ 2d0:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 2d4:	8f 70       	andi	r24, 0x0F	; 15
+ 2d6:	08 95       	ret
+
+000002d8 <DS3231GetDate>:
+ 2d8:	84 e0       	ldi	r24, 0x04	; 4
+ 2da:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 2de:	8f 70       	andi	r24, 0x0F	; 15
+ 2e0:	08 95       	ret
+
+000002e2 <DS3231GetMonth>:
+ 2e2:	85 e0       	ldi	r24, 0x05	; 5
+ 2e4:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 2e8:	8f 70       	andi	r24, 0x0F	; 15
+ 2ea:	08 95       	ret
+
+000002ec <DS3231GetYear>:
+ 2ec:	86 e0       	ldi	r24, 0x06	; 6
+ 2ee:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 2f2:	8f 70       	andi	r24, 0x0F	; 15
+ 2f4:	08 95       	ret
+
+000002f6 <DS3231GetTenSeconds>:
+ 2f6:	80 e0       	ldi	r24, 0x00	; 0
+ 2f8:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 2fc:	80 77       	andi	r24, 0x70	; 112
+ 2fe:	82 95       	swap	r24
+ 300:	8f 70       	andi	r24, 0x0F	; 15
+ 302:	08 95       	ret
+
+00000304 <DS3231GetTenMinutes>:
+ 304:	81 e0       	ldi	r24, 0x01	; 1
+ 306:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 30a:	82 95       	swap	r24
+ 30c:	8f 70       	andi	r24, 0x0F	; 15
+ 30e:	08 95       	ret
+
+00000310 <DS3231GetTenHours>:
+ 310:	82 e0       	ldi	r24, 0x02	; 2
+ 312:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 316:	80 73       	andi	r24, 0x30	; 48
+ 318:	82 95       	swap	r24
+ 31a:	8f 70       	andi	r24, 0x0F	; 15
+ 31c:	08 95       	ret
+
+0000031e <DS3231GetTenDate>:
+ 31e:	84 e0       	ldi	r24, 0x04	; 4
+ 320:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 324:	80 73       	andi	r24, 0x30	; 48
+ 326:	82 95       	swap	r24
+ 328:	8f 70       	andi	r24, 0x0F	; 15
+ 32a:	08 95       	ret
+
+0000032c <DS3231GetTenMonth>:
+ 32c:	85 e0       	ldi	r24, 0x05	; 5
+ 32e:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 332:	82 95       	swap	r24
+ 334:	8f 70       	andi	r24, 0x0F	; 15
+ 336:	08 95       	ret
+
+00000338 <DS3231GetTenYear>:
+ 338:	86 e0       	ldi	r24, 0x06	; 6
+ 33a:	0e 94 1c 01 	call	0x238	; 0x238 <DS3231ReadDataFrom>
+ 33e:	82 95       	swap	r24
+ 340:	8f 70       	andi	r24, 0x0F	; 15
+ 342:	08 95       	ret
+
+00000344 <lcd_data>:
+ 344:	cf 93       	push	r28
+ 346:	c8 2f       	mov	r28, r24
+ 348:	5c 9a       	sbi	0x0b, 4	; 11
+ 34a:	0e 94 5a 00 	call	0xb4	; 0xb4 <lcd_out>
+ 34e:	8c 2f       	mov	r24, r28
+ 350:	82 95       	swap	r24
+ 352:	80 7f       	andi	r24, 0xF0	; 240
+ 354:	0e 94 5a 00 	call	0xb4	; 0xb4 <lcd_out>
+ 358:	85 ef       	ldi	r24, 0xF5	; 245
+ 35a:	8a 95       	dec	r24
+ 35c:	f1 f7       	brne	.-4      	; 0x35a <lcd_data+0x16>
+ 35e:	00 00       	nop
+ 360:	cf 91       	pop	r28
+ 362:	08 95       	ret
+
+00000364 <lcd_command>:
+ 364:	cf 93       	push	r28
+ 366:	c8 2f       	mov	r28, r24
+ 368:	5c 98       	cbi	0x0b, 4	; 11
+ 36a:	0e 94 5a 00 	call	0xb4	; 0xb4 <lcd_out>
+ 36e:	8c 2f       	mov	r24, r28
+ 370:	82 95       	swap	r24
+ 372:	80 7f       	andi	r24, 0xF0	; 240
+ 374:	0e 94 5a 00 	call	0xb4	; 0xb4 <lcd_out>
+ 378:	80 ee       	ldi	r24, 0xE0	; 224
+ 37a:	8a 95       	dec	r24
+ 37c:	f1 f7       	brne	.-4      	; 0x37a <lcd_command+0x16>
+ 37e:	cf 91       	pop	r28
+ 380:	08 95       	ret
+
+00000382 <lcd_clear>:
+ 382:	81 e0       	ldi	r24, 0x01	; 1
+ 384:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 388:	8f e3       	ldi	r24, 0x3F	; 63
+ 38a:	9f e1       	ldi	r25, 0x1F	; 31
+ 38c:	01 97       	sbiw	r24, 0x01	; 1
+ 38e:	f1 f7       	brne	.-4      	; 0x38c <lcd_clear+0xa>
+ 390:	00 c0       	rjmp	.+0      	; 0x392 <lcd_clear+0x10>
+ 392:	00 00       	nop
+ 394:	08 95       	ret
+
+00000396 <lcd_init>:
+ 396:	8a b1       	in	r24, 0x0a	; 10
+ 398:	8f 63       	ori	r24, 0x3F	; 63
+ 39a:	8a b9       	out	0x0a, r24	; 10
+ 39c:	8b b1       	in	r24, 0x0b	; 11
+ 39e:	80 7c       	andi	r24, 0xC0	; 192
+ 3a0:	8b b9       	out	0x0b, r24	; 11
+ 3a2:	8f e5       	ldi	r24, 0x5F	; 95
+ 3a4:	9a ee       	ldi	r25, 0xEA	; 234
+ 3a6:	01 97       	sbiw	r24, 0x01	; 1
+ 3a8:	f1 f7       	brne	.-4      	; 0x3a6 <lcd_init+0x10>
+ 3aa:	00 c0       	rjmp	.+0      	; 0x3ac <lcd_init+0x16>
+ 3ac:	00 00       	nop
+ 3ae:	80 e3       	ldi	r24, 0x30	; 48
+ 3b0:	0e 94 5a 00 	call	0xb4	; 0xb4 <lcd_out>
+ 3b4:	8f e1       	ldi	r24, 0x1F	; 31
+ 3b6:	9e e4       	ldi	r25, 0x4E	; 78
+ 3b8:	01 97       	sbiw	r24, 0x01	; 1
+ 3ba:	f1 f7       	brne	.-4      	; 0x3b8 <lcd_init+0x22>
+ 3bc:	00 c0       	rjmp	.+0      	; 0x3be <lcd_init+0x28>
+ 3be:	00 00       	nop
+ 3c0:	0e 94 53 00 	call	0xa6	; 0xa6 <lcd_enable>
+ 3c4:	8f e9       	ldi	r24, 0x9F	; 159
+ 3c6:	9f e0       	ldi	r25, 0x0F	; 15
+ 3c8:	01 97       	sbiw	r24, 0x01	; 1
+ 3ca:	f1 f7       	brne	.-4      	; 0x3c8 <lcd_init+0x32>
+ 3cc:	00 c0       	rjmp	.+0      	; 0x3ce <lcd_init+0x38>
+ 3ce:	00 00       	nop
+ 3d0:	0e 94 53 00 	call	0xa6	; 0xa6 <lcd_enable>
+ 3d4:	8f e9       	ldi	r24, 0x9F	; 159
+ 3d6:	9f e0       	ldi	r25, 0x0F	; 15
+ 3d8:	01 97       	sbiw	r24, 0x01	; 1
+ 3da:	f1 f7       	brne	.-4      	; 0x3d8 <lcd_init+0x42>
+ 3dc:	00 c0       	rjmp	.+0      	; 0x3de <lcd_init+0x48>
+ 3de:	00 00       	nop
+ 3e0:	80 e2       	ldi	r24, 0x20	; 32
+ 3e2:	0e 94 5a 00 	call	0xb4	; 0xb4 <lcd_out>
+ 3e6:	8f e1       	ldi	r24, 0x1F	; 31
+ 3e8:	9e e4       	ldi	r25, 0x4E	; 78
+ 3ea:	01 97       	sbiw	r24, 0x01	; 1
+ 3ec:	f1 f7       	brne	.-4      	; 0x3ea <lcd_init+0x54>
+ 3ee:	00 c0       	rjmp	.+0      	; 0x3f0 <lcd_init+0x5a>
+ 3f0:	00 00       	nop
+ 3f2:	88 e2       	ldi	r24, 0x28	; 40
+ 3f4:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 3f8:	8c e0       	ldi	r24, 0x0C	; 12
+ 3fa:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 3fe:	86 e0       	ldi	r24, 0x06	; 6
+ 400:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 404:	0c 94 c1 01 	jmp	0x382	; 0x382 <lcd_clear>
+
+00000408 <lcd_string>:
+ 408:	cf 93       	push	r28
+ 40a:	df 93       	push	r29
+ 40c:	ec 01       	movw	r28, r24
+ 40e:	89 91       	ld	r24, Y+
+ 410:	88 23       	and	r24, r24
+ 412:	19 f0       	breq	.+6      	; 0x41a <lcd_string+0x12>
+ 414:	0e 94 a2 01 	call	0x344	; 0x344 <lcd_data>
+ 418:	fa cf       	rjmp	.-12     	; 0x40e <lcd_string+0x6>
+ 41a:	df 91       	pop	r29
+ 41c:	cf 91       	pop	r28
+ 41e:	08 95       	ret
+
+00000420 <settime>:
+ 420:	0e 94 5d 01 	call	0x2ba	; 0x2ba <DS3231GetSeconds>
+ 424:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 428:	4a e0       	ldi	r20, 0x0A	; 10
+ 42a:	64 e0       	ldi	r22, 0x04	; 4
+ 42c:	71 e0       	ldi	r23, 0x01	; 1
+ 42e:	90 e0       	ldi	r25, 0x00	; 0
+ 430:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 434:	87 ec       	ldi	r24, 0xC7	; 199
+ 436:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 43a:	84 e0       	ldi	r24, 0x04	; 4
+ 43c:	91 e0       	ldi	r25, 0x01	; 1
+ 43e:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 442:	0e 94 7b 01 	call	0x2f6	; 0x2f6 <DS3231GetTenSeconds>
+ 446:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 44a:	4a e0       	ldi	r20, 0x0A	; 10
+ 44c:	64 e0       	ldi	r22, 0x04	; 4
+ 44e:	71 e0       	ldi	r23, 0x01	; 1
+ 450:	90 e0       	ldi	r25, 0x00	; 0
+ 452:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 456:	86 ec       	ldi	r24, 0xC6	; 198
+ 458:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 45c:	84 e0       	ldi	r24, 0x04	; 4
+ 45e:	91 e0       	ldi	r25, 0x01	; 1
+ 460:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 464:	85 ec       	ldi	r24, 0xC5	; 197
+ 466:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 46a:	80 e0       	ldi	r24, 0x00	; 0
+ 46c:	91 e0       	ldi	r25, 0x01	; 1
+ 46e:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 472:	0e 94 62 01 	call	0x2c4	; 0x2c4 <DS3231GetMinutes>
+ 476:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 47a:	4a e0       	ldi	r20, 0x0A	; 10
+ 47c:	64 e0       	ldi	r22, 0x04	; 4
+ 47e:	71 e0       	ldi	r23, 0x01	; 1
+ 480:	90 e0       	ldi	r25, 0x00	; 0
+ 482:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 486:	84 ec       	ldi	r24, 0xC4	; 196
+ 488:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 48c:	84 e0       	ldi	r24, 0x04	; 4
+ 48e:	91 e0       	ldi	r25, 0x01	; 1
+ 490:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 494:	0e 94 82 01 	call	0x304	; 0x304 <DS3231GetTenMinutes>
+ 498:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 49c:	4a e0       	ldi	r20, 0x0A	; 10
+ 49e:	64 e0       	ldi	r22, 0x04	; 4
+ 4a0:	71 e0       	ldi	r23, 0x01	; 1
+ 4a2:	90 e0       	ldi	r25, 0x00	; 0
+ 4a4:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 4a8:	83 ec       	ldi	r24, 0xC3	; 195
+ 4aa:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 4ae:	84 e0       	ldi	r24, 0x04	; 4
+ 4b0:	91 e0       	ldi	r25, 0x01	; 1
+ 4b2:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 4b6:	82 ec       	ldi	r24, 0xC2	; 194
+ 4b8:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 4bc:	80 e0       	ldi	r24, 0x00	; 0
+ 4be:	91 e0       	ldi	r25, 0x01	; 1
+ 4c0:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 4c4:	0e 94 67 01 	call	0x2ce	; 0x2ce <DS3231GetHours>
+ 4c8:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 4cc:	4a e0       	ldi	r20, 0x0A	; 10
+ 4ce:	64 e0       	ldi	r22, 0x04	; 4
+ 4d0:	71 e0       	ldi	r23, 0x01	; 1
+ 4d2:	90 e0       	ldi	r25, 0x00	; 0
+ 4d4:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 4d8:	81 ec       	ldi	r24, 0xC1	; 193
+ 4da:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 4de:	84 e0       	ldi	r24, 0x04	; 4
+ 4e0:	91 e0       	ldi	r25, 0x01	; 1
+ 4e2:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 4e6:	0e 94 88 01 	call	0x310	; 0x310 <DS3231GetTenHours>
+ 4ea:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 4ee:	4a e0       	ldi	r20, 0x0A	; 10
+ 4f0:	64 e0       	ldi	r22, 0x04	; 4
+ 4f2:	71 e0       	ldi	r23, 0x01	; 1
+ 4f4:	90 e0       	ldi	r25, 0x00	; 0
+ 4f6:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 4fa:	80 ec       	ldi	r24, 0xC0	; 192
+ 4fc:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 500:	84 e0       	ldi	r24, 0x04	; 4
+ 502:	91 e0       	ldi	r25, 0x01	; 1
+ 504:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 508:	0e 94 6c 01 	call	0x2d8	; 0x2d8 <DS3231GetDate>
+ 50c:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 510:	4a e0       	ldi	r20, 0x0A	; 10
+ 512:	64 e0       	ldi	r22, 0x04	; 4
+ 514:	71 e0       	ldi	r23, 0x01	; 1
+ 516:	90 e0       	ldi	r25, 0x00	; 0
+ 518:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 51c:	81 e8       	ldi	r24, 0x81	; 129
+ 51e:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 522:	84 e0       	ldi	r24, 0x04	; 4
+ 524:	91 e0       	ldi	r25, 0x01	; 1
+ 526:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 52a:	0e 94 8f 01 	call	0x31e	; 0x31e <DS3231GetTenDate>
+ 52e:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 532:	4a e0       	ldi	r20, 0x0A	; 10
+ 534:	64 e0       	ldi	r22, 0x04	; 4
+ 536:	71 e0       	ldi	r23, 0x01	; 1
+ 538:	90 e0       	ldi	r25, 0x00	; 0
+ 53a:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 53e:	80 e8       	ldi	r24, 0x80	; 128
+ 540:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 544:	84 e0       	ldi	r24, 0x04	; 4
+ 546:	91 e0       	ldi	r25, 0x01	; 1
+ 548:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 54c:	82 e8       	ldi	r24, 0x82	; 130
+ 54e:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 552:	82 e0       	ldi	r24, 0x02	; 2
+ 554:	91 e0       	ldi	r25, 0x01	; 1
+ 556:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 55a:	0e 94 71 01 	call	0x2e2	; 0x2e2 <DS3231GetMonth>
+ 55e:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 562:	4a e0       	ldi	r20, 0x0A	; 10
+ 564:	64 e0       	ldi	r22, 0x04	; 4
+ 566:	71 e0       	ldi	r23, 0x01	; 1
+ 568:	90 e0       	ldi	r25, 0x00	; 0
+ 56a:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 56e:	84 e8       	ldi	r24, 0x84	; 132
+ 570:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 574:	84 e0       	ldi	r24, 0x04	; 4
+ 576:	91 e0       	ldi	r25, 0x01	; 1
+ 578:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 57c:	0e 94 96 01 	call	0x32c	; 0x32c <DS3231GetTenMonth>
+ 580:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 584:	4a e0       	ldi	r20, 0x0A	; 10
+ 586:	64 e0       	ldi	r22, 0x04	; 4
+ 588:	71 e0       	ldi	r23, 0x01	; 1
+ 58a:	90 e0       	ldi	r25, 0x00	; 0
+ 58c:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 590:	83 e8       	ldi	r24, 0x83	; 131
+ 592:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 596:	84 e0       	ldi	r24, 0x04	; 4
+ 598:	91 e0       	ldi	r25, 0x01	; 1
+ 59a:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 59e:	85 e8       	ldi	r24, 0x85	; 133
+ 5a0:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 5a4:	82 e0       	ldi	r24, 0x02	; 2
+ 5a6:	91 e0       	ldi	r25, 0x01	; 1
+ 5a8:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 5ac:	0e 94 76 01 	call	0x2ec	; 0x2ec <DS3231GetYear>
+ 5b0:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 5b4:	4a e0       	ldi	r20, 0x0A	; 10
+ 5b6:	64 e0       	ldi	r22, 0x04	; 4
+ 5b8:	71 e0       	ldi	r23, 0x01	; 1
+ 5ba:	90 e0       	ldi	r25, 0x00	; 0
+ 5bc:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 5c0:	87 e8       	ldi	r24, 0x87	; 135
+ 5c2:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 5c6:	84 e0       	ldi	r24, 0x04	; 4
+ 5c8:	91 e0       	ldi	r25, 0x01	; 1
+ 5ca:	0e 94 04 02 	call	0x408	; 0x408 <lcd_string>
+ 5ce:	0e 94 9c 01 	call	0x338	; 0x338 <DS3231GetTenYear>
+ 5d2:	0e 94 91 00 	call	0x122	; 0x122 <bcd_to_decimal>
+ 5d6:	4a e0       	ldi	r20, 0x0A	; 10
+ 5d8:	64 e0       	ldi	r22, 0x04	; 4
+ 5da:	71 e0       	ldi	r23, 0x01	; 1
+ 5dc:	90 e0       	ldi	r25, 0x00	; 0
+ 5de:	0e 94 20 03 	call	0x640	; 0x640 <__itoa_ncheck>
+ 5e2:	86 e8       	ldi	r24, 0x86	; 134
+ 5e4:	0e 94 b2 01 	call	0x364	; 0x364 <lcd_command>
+ 5e8:	84 e0       	ldi	r24, 0x04	; 4
+ 5ea:	91 e0       	ldi	r25, 0x01	; 1
+ 5ec:	0c 94 04 02 	jmp	0x408	; 0x408 <lcd_string>
+
+000005f0 <main>:
+ 5f0:	0e 94 cb 01 	call	0x396	; 0x396 <lcd_init>
+ 5f4:	0e 94 64 00 	call	0xc8	; 0xc8 <TWIInit>
+ 5f8:	85 ee       	ldi	r24, 0xE5	; 229
+ 5fa:	c8 2e       	mov	r12, r24
+ 5fc:	d1 2c       	mov	r13, r1
+ 5fe:	9c e0       	ldi	r25, 0x0C	; 12
+ 600:	e9 2e       	mov	r14, r25
+ 602:	0f e1       	ldi	r16, 0x1F	; 31
+ 604:	27 e0       	ldi	r18, 0x07	; 7
+ 606:	42 e3       	ldi	r20, 0x32	; 50
+ 608:	6b e3       	ldi	r22, 0x3B	; 59
+ 60a:	87 e1       	ldi	r24, 0x17	; 23
+ 60c:	0e 94 a3 00 	call	0x146	; 0x146 <DS3231SetTimeAndDate>
+ 610:	0e 94 10 02 	call	0x420	; 0x420 <settime>
+ 614:	2f ef       	ldi	r18, 0xFF	; 255
+ 616:	89 e6       	ldi	r24, 0x69	; 105
+ 618:	98 e1       	ldi	r25, 0x18	; 24
+ 61a:	21 50       	subi	r18, 0x01	; 1
+ 61c:	80 40       	sbci	r24, 0x00	; 0
+ 61e:	90 40       	sbci	r25, 0x00	; 0
+ 620:	e1 f7       	brne	.-8      	; 0x61a <main+0x2a>
+ 622:	00 c0       	rjmp	.+0      	; 0x624 <main+0x34>
+ 624:	00 00       	nop
+ 626:	f4 cf       	rjmp	.-24     	; 0x610 <main+0x20>
+
+00000628 <__udivmodqi4>:
+ 628:	99 1b       	sub	r25, r25
+ 62a:	79 e0       	ldi	r23, 0x09	; 9
+ 62c:	04 c0       	rjmp	.+8      	; 0x636 <__udivmodqi4_ep>
+
+0000062e <__udivmodqi4_loop>:
+ 62e:	99 1f       	adc	r25, r25
+ 630:	96 17       	cp	r25, r22
+ 632:	08 f0       	brcs	.+2      	; 0x636 <__udivmodqi4_ep>
+ 634:	96 1b       	sub	r25, r22
+
+00000636 <__udivmodqi4_ep>:
+ 636:	88 1f       	adc	r24, r24
+ 638:	7a 95       	dec	r23
+ 63a:	c9 f7       	brne	.-14     	; 0x62e <__udivmodqi4_loop>
+ 63c:	80 95       	com	r24
+ 63e:	08 95       	ret
+
+00000640 <__itoa_ncheck>:
+ 640:	bb 27       	eor	r27, r27
+ 642:	4a 30       	cpi	r20, 0x0A	; 10
+ 644:	31 f4       	brne	.+12     	; 0x652 <__itoa_ncheck+0x12>
+ 646:	99 23       	and	r25, r25
+ 648:	22 f4       	brpl	.+8      	; 0x652 <__itoa_ncheck+0x12>
+ 64a:	bd e2       	ldi	r27, 0x2D	; 45
+ 64c:	90 95       	com	r25
+ 64e:	81 95       	neg	r24
+ 650:	9f 4f       	sbci	r25, 0xFF	; 255
+ 652:	0c 94 2c 03 	jmp	0x658	; 0x658 <__utoa_common>
+
+00000656 <__utoa_ncheck>:
+ 656:	bb 27       	eor	r27, r27
+
+00000658 <__utoa_common>:
+ 658:	fb 01       	movw	r30, r22
+ 65a:	55 27       	eor	r21, r21
+ 65c:	aa 27       	eor	r26, r26
+ 65e:	88 0f       	add	r24, r24
+ 660:	99 1f       	adc	r25, r25
+ 662:	aa 1f       	adc	r26, r26
+ 664:	a4 17       	cp	r26, r20
+ 666:	10 f0       	brcs	.+4      	; 0x66c <__utoa_common+0x14>
+ 668:	a4 1b       	sub	r26, r20
+ 66a:	83 95       	inc	r24
+ 66c:	50 51       	subi	r21, 0x10	; 16
+ 66e:	b9 f7       	brne	.-18     	; 0x65e <__utoa_common+0x6>
+ 670:	a0 5d       	subi	r26, 0xD0	; 208
+ 672:	aa 33       	cpi	r26, 0x3A	; 58
+ 674:	08 f0       	brcs	.+2      	; 0x678 <__utoa_common+0x20>
+ 676:	a9 5d       	subi	r26, 0xD9	; 217
+ 678:	a1 93       	st	Z+, r26
+ 67a:	00 97       	sbiw	r24, 0x00	; 0
+ 67c:	79 f7       	brne	.-34     	; 0x65c <__utoa_common+0x4>
+ 67e:	b1 11       	cpse	r27, r1
+ 680:	b1 93       	st	Z+, r27
+ 682:	11 92       	st	Z+, r1
+ 684:	cb 01       	movw	r24, r22
+ 686:	0c 94 45 03 	jmp	0x68a	; 0x68a <strrev>
+
+0000068a <strrev>:
+ 68a:	dc 01       	movw	r26, r24
+ 68c:	fc 01       	movw	r30, r24
+ 68e:	67 2f       	mov	r22, r23
+ 690:	71 91       	ld	r23, Z+
+ 692:	77 23       	and	r23, r23
+ 694:	e1 f7       	brne	.-8      	; 0x68e <strrev+0x4>
+ 696:	32 97       	sbiw	r30, 0x02	; 2
+ 698:	04 c0       	rjmp	.+8      	; 0x6a2 <strrev+0x18>
+ 69a:	7c 91       	ld	r23, X
+ 69c:	6d 93       	st	X+, r22
+ 69e:	70 83       	st	Z, r23
+ 6a0:	62 91       	ld	r22, -Z
+ 6a2:	ae 17       	cp	r26, r30
+ 6a4:	bf 07       	cpc	r27, r31
+ 6a6:	c8 f3       	brcs	.-14     	; 0x69a <strrev+0x10>
+ 6a8:	08 95       	ret
+
+000006aa <_exit>:
+ 6aa:	f8 94       	cli
+
+000006ac <__stop_program>:
+ 6ac:	ff cf       	rjmp	.-2      	; 0x6ac <__stop_program>

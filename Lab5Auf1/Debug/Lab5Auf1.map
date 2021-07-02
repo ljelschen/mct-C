@@ -20,6 +20,8 @@ Discarded input sections
                 0x00000000       0x12 main.o
  .text.DisableAlarm1
                 0x00000000       0x12 main.o
+ .text.SetRS1kHz
+                0x00000000       0x12 main.o
  .text.DS3231GetSeconds
                 0x00000000        0xa main.o
  .text.DS3231GetMinutes
@@ -205,7 +207,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x516
+.text           0x00000000      0x5ba
  *(.vectors)
  .vectors       0x00000000       0x68 F:/Atmel/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -289,62 +291,65 @@ END GROUP
                 0x0000008c                __vector_20
                 0x00000090                . = ALIGN (0x2)
  *(.text.*)
- .text.TWIInit  0x00000090       0x16 main.o
+ .text.TWIInit  0x00000090       0x12 main.o
                 0x00000090                TWIInit
  .text.TWIStart
-                0x000000a6       0x12 main.o
-                0x000000a6                TWIStart
- .text.TWIStop  0x000000b8       0x10 main.o
-                0x000000b8                TWIStop
+                0x000000a2       0x10 main.o
+                0x000000a2                TWIStart
+ .text.TWIStop  0x000000b2       0x10 main.o
+                0x000000b2                TWIStop
  .text.TWIWrite
-                0x000000c8       0x14 main.o
-                0x000000c8                TWIWrite
+                0x000000c2       0x14 main.o
+                0x000000c2                TWIWrite
  .text.TWIReadNACK
-                0x000000dc       0x14 main.o
-                0x000000dc                TWIReadNACK
+                0x000000d6       0x14 main.o
+                0x000000d6                TWIReadNACK
  .text.TWIGetStatus
-                0x000000f0        0x8 main.o
-                0x000000f0                TWIGetStatus
+                0x000000ea        0x8 main.o
+                0x000000ea                TWIGetStatus
  .text.TWIError
-                0x000000f8        0xa main.o
-                0x000000f8                TWIError
+                0x000000f2        0x6 main.o
+                0x000000f2                TWIError
  .text.decimal_to_bcd
-                0x00000102       0x26 main.o
-                0x00000102                decimal_to_bcd
+                0x000000f8       0x26 main.o
+                0x000000f8                decimal_to_bcd
  .text.DS3231StartOsc
-                0x00000128       0x4c main.o
-                0x00000128                DS3231StartOsc
+                0x0000011e       0x4c main.o
+                0x0000011e                DS3231StartOsc
  .text.DS3231SetTimeAndDate
-                0x00000174       0xf4 main.o
-                0x00000174                DS3231SetTimeAndDate
+                0x0000016a       0xf4 main.o
+                0x0000016a                DS3231SetTimeAndDate
  .text.DS3231ReadDataFrom
-                0x00000268       0x76 main.o
-                0x00000268                DS3231ReadDataFrom
+                0x0000025e       0x76 main.o
+                0x0000025e                DS3231ReadDataFrom
  .text.DS3231WriteDataTo
-                0x000002de       0x58 main.o
-                0x000002de                DS3231WriteDataTo
+                0x000002d4       0x58 main.o
+                0x000002d4                DS3231WriteDataTo
  .text.EnableIntSqwt
-                0x00000336       0x12 main.o
-                0x00000336                EnableIntSqwt
+                0x0000032c       0x12 main.o
+                0x0000032c                EnableIntSqwt
  .text.getBitFromRegister
-                0x00000348       0x44 main.o
-                0x00000348                getBitFromRegister
+                0x0000033e       0xaa main.o
+                0x0000033e                getBitFromRegister
  .text.SetAlarm1Rate
-                0x0000038c       0xd2 main.o
-                0x0000038c                SetAlarm1Rate
+                0x000003e8       0xd2 main.o
+                0x000003e8                SetAlarm1Rate
  .text.EnableAlarm1
-                0x0000045e       0x12 main.o
-                0x0000045e                EnableAlarm1
+                0x000004ba       0x12 main.o
+                0x000004ba                EnableAlarm1
+ .text.ResetAlarm1
+                0x000004cc       0x12 main.o
+                0x000004cc                ResetAlarm1
  .text.__vector_1
-                0x00000470       0x56 main.o
-                0x00000470                __vector_1
- .text.main     0x000004c6       0x4c main.o
-                0x000004c6                main
-                0x00000512                . = ALIGN (0x2)
+                0x000004de       0x88 main.o
+                0x000004de                __vector_1
+ .text.main     0x00000566       0x50 main.o
+                0x00000566                main
+                0x000005b6                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000512        0x0 f:/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000512                _exit
-                0x00000512                exit
+ .fini9         0x000005b6        0x0 f:/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000005b6                _exit
+                0x000005b6                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -363,11 +368,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000512        0x4 f:/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000005b6        0x4 f:/atmel/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000516                _etext = .
+                0x000005ba                _etext = .
 
-.data           0x00800100        0x0 load address 0x00000516
+.data           0x00800100        0x0 load address 0x000005ba
                 [!provide]                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -387,8 +392,8 @@ END GROUP
                 0x00800100                zeahler
  *(COMMON)
                 0x00800102                PROVIDE (__bss_end, .)
-                0x00000516                __data_load_start = LOADADDR (.data)
-                0x00000516                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000005ba                __data_load_start = LOADADDR (.data)
+                0x000005ba                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800102        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -459,42 +464,42 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x130
+.debug_aranges  0x00000000      0x140
  *(.debug_aranges)
  .debug_aranges
-                0x00000000      0x130 main.o
+                0x00000000      0x140 main.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1388
+.debug_info     0x00000000     0x1414
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 F:/Atmel/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4      0xd94 main.o
+ .debug_info    0x000005f4      0xe20 main.o
 
-.debug_abbrev   0x00000000      0x7cc
+.debug_abbrev   0x00000000      0x7a5
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 F:/Atmel/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_abbrev  0x000005a2      0x22a main.o
+ .debug_abbrev  0x000005a2      0x203 main.o
 
-.debug_line     0x00000000      0x971
+.debug_line     0x00000000      0xa12
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 F:/Atmel/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000134      0x83d main.o
+ .debug_line    0x00000134      0x8de main.o
 
-.debug_frame    0x00000000      0x2c0
+.debug_frame    0x00000000      0x314
  *(.debug_frame)
- .debug_frame   0x00000000      0x2c0 main.o
+ .debug_frame   0x00000000      0x314 main.o
 
-.debug_str      0x00000000      0x5d3
+.debug_str      0x00000000      0x5f2
  *(.debug_str)
  .debug_str     0x00000000      0x208 F:/Atmel/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x3cb main.o
-                                0x404 (size before relaxing)
+ .debug_str     0x00000208      0x3ea main.o
+                                0x423 (size before relaxing)
 
-.debug_loc      0x00000000      0x896
+.debug_loc      0x00000000      0x907
  *(.debug_loc)
- .debug_loc     0x00000000      0x896 main.o
+ .debug_loc     0x00000000      0x907 main.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -514,9 +519,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x120
+.debug_ranges   0x00000000      0x130
  *(.debug_ranges)
- .debug_ranges  0x00000000      0x120 main.o
+ .debug_ranges  0x00000000      0x130 main.o
 
 .debug_macro
  *(.debug_macro)

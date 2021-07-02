@@ -29,7 +29,7 @@ void DS3231StartOsc(void) {
 	TWIWrite((uint8_t)(DS3231_ADDRESS)); // Write operation
 	if (TWIGetStatus() != 0x18) TWIError();
 	
-	TWIWrite((uint8_t)(0x0E)); // Control Register
+	TWIWrite((uint8_t)(DS3231_REG_CONTROL)); // Control Register
 	if (TWIGetStatus() != 0x28) TWIError();
 	
 	TWIWrite((uint8_t)(0x00)); // Enable
@@ -173,12 +173,47 @@ void SetAlarm1Rate(uint8_t alarm1Rate){
 	TWIStop();
 }
 
+void SetAlarm2Rate(uint8_t alarm1Rate){
+	
+	uint8_t A1M1 = getBitFromRegister(alarm1Rate, 0) << 7;
+	uint8_t A1M2 = getBitFromRegister(alarm1Rate, 1) << 7;
+	uint8_t A1M3 = getBitFromRegister(alarm1Rate, 2) << 7;
+
+	TWIStart();
+	if (TWIGetStatus() != 0x08) TWIError();
+
+	TWIWrite((uint8_t)(DS3231_ADDRESS)); // Write operation
+	if (TWIGetStatus() != 0x18) TWIError();
+
+	TWIWrite((uint8_t)(DS3231_REG_AL2_MIN)); 
+	if (TWIGetStatus() != 0x28) TWIError();
+
+	TWIWrite((uint8_t)(A1M1));
+	if (TWIGetStatus() != 0x28) TWIError();
+
+	TWIWrite((uint8_t)(A1M2));
+	if (TWIGetStatus() != 0x28) TWIError();
+
+	TWIWrite((uint8_t)(A1M3));
+	if (TWIGetStatus() != 0x28) TWIError();
+
+	TWIStop();
+}
+
 // enables alarm1
 void EnableAlarm1(){
   uint8_t ctrl_reg = DS3231ReadDataFrom(DS3231_REG_CONTROL);
   ctrl_reg |= 0x01;
   DS3231WriteDataTo(DS3231_REG_CONTROL, ctrl_reg);
 }
+
+// enables alarm1
+void EnableAlarm2(){
+  uint8_t ctrl_reg = DS3231ReadDataFrom(DS3231_REG_CONTROL);
+  ctrl_reg |= 0x02;
+  DS3231WriteDataTo(DS3231_REG_CONTROL, ctrl_reg);
+}
+
 
 // disables alarm1
 void DisableAlarm1(){
@@ -187,10 +222,22 @@ void DisableAlarm1(){
   DS3231WriteDataTo(DS3231_REG_CONTROL, ctrl_reg);
 }
 
+void DisableAlarm2(){
+  uint8_t ctrl_reg = DS3231ReadDataFrom(DS3231_REG_CONTROL);
+  ctrl_reg &= 0xFD;
+  DS3231WriteDataTo(DS3231_REG_CONTROL, ctrl_reg);
+}
 // resets alarm1 flag bit
 void ResetAlarm1(){
   uint8_t stat_reg = DS3231ReadDataFrom(DS3231_REG_STATUS);
   stat_reg &= 0xFE;
+  DS3231WriteDataTo(DS3231_REG_STATUS, stat_reg);
+}
+
+// resets alarm1 flag bit
+void ResetAlarm2(){
+  uint8_t stat_reg = DS3231ReadDataFrom(DS3231_REG_STATUS);
+  stat_reg &= 0xFD;
   DS3231WriteDataTo(DS3231_REG_STATUS, stat_reg);
 }
 
@@ -293,3 +340,13 @@ uint8_t DS3231GetTenYear(void) {
 	u8data = (u8data >> 4);
 	return u8data;
 }
+
+
+int Alarm2_Status(void){
+  uint8_t ctrl_reg = DS3231ReadDataFrom(DS3231_REG_CONTROL);
+  if(ctrl_reg & 0x02)
+    return 1;
+  else
+    return 0;
+}
+

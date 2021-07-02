@@ -11,22 +11,26 @@
 #include <avr/interrupt.h>
 #include <util/twi.h>
 #include <util/delay.h>
+
+#include "TWIPrimitives.h"
 #include "TWIPrimitives.c"
+
+#include "DS3231.h"
 #include "DS3231.c"
 
-int zeahler = 0;
+volatile int zaehler = 0;
 
 ISR(INT0_vect){
-	//zeahler bis 60
-	if(zeahler == 60){
-		zeahler = 0; //setzt den zeahler zurueck
+	//zaehler bis 60
+	if(zaehler == 60){
+		zaehler = 0; //setzt den zaehler zurueck
 	}else{
-		zeahler += 1; //erhoht den zeahler um 1
+		zaehler += 1; //erhoht den zaehler um 1
 	}
 
 	PORTC &= ~(1<<0); //setzt PORTC zurueck
-	PORTC |= (zeahler & 0x20)>>5; //setzt das 6.bit in PORTC
-	PORTB = (zeahler & 0x1F); //setzt die Restlichen bits in PORTB
+	PORTC |= (zaehler & 0x20)>>5; //setzt das 6.bit in PORTC
+	PORTB = (zaehler & 0x1F); //setzt die Restlichen bits in PORTB
 	ResetAlarm1(); //setzt das interrupt in der RTC zurueck
 }
 
@@ -47,9 +51,7 @@ int main(void){
 	uint8_t year = 21;
 	uint8_t dayOfWeek = 7;
 	DS3231SetTimeAndDate(h, m, s, dayOfWeek, date, month, year); //setzen der Zeit in der RTC
-
 	SetAlarm1Rate(0x0F); //alarmrate auf sekuendlich setzen
-	
 	EnableAlarm1(); // Alarm 1 Interrupt aktivieren
 	EnableIntSqwt(); // Interrupts auf den Ausgang belegen
 
@@ -57,7 +59,6 @@ int main(void){
 	EICRA = 1<<1; // INT0 at Falling edge
 	EIMSK = 1<<0; //enable interrupt mask
 	sei(); // global Interrupts einschalten
-
 
     while (1) {}
 }
