@@ -146,8 +146,12 @@ int workInput(void){
 
     // dayOfWeek wird nichts genutzt deswegen belibig gesetzt
     uint8_t dayOfWeek = 7;
-    DS3231SetTimeAndDate(h, m, s, dayOfWeek, date, month, year); //setzen der zeit in der RTC
-    
+    //setzen der zeit in der RTC
+    DS3231SetTimeAndDate(h, m, s, dayOfWeek, date, month, year); 
+    //alarmrate auf minutlich setzen
+    SetAlarm2Rate(0x0F);
+    // Alarm 2 Interrupt aktivieren
+	EnableAlarm2(); 
     //schreiben der Temp. auf LCD
     lcd_setcursor(4,2); //cursor an stelle der Temp.
     //umwandeln von int. in char
@@ -173,6 +177,7 @@ ISR(INT0_vect){
 
 int main(void)
 {
+    DHT_Setup();
     lcd_init();	 // display init
     uart_init( UART_BAUD_SELECT(UART_BAUD_RATE,F_CPU) ); //bus init
     
@@ -186,7 +191,8 @@ int main(void)
 	uint8_t month = 12; //JUNE
 	int year = 2021;
 	uint8_t dayOfWeek = 7;
-	DS3231SetTimeAndDate(h, m, s, dayOfWeek, date, month, year); //setzen der Zeit in der RTC
+    //setzen der Zeit in der RTC
+	DS3231SetTimeAndDate(h, m, s, dayOfWeek, date, month, year); 
   
 	SetAlarm2Rate(0x0F); //alarmrate auf minutlich setzen
 	EnableAlarm2(); // Alarm 2 Interrupt aktivieren
