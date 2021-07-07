@@ -8,7 +8,7 @@ enum DHT_Status_t __DHT_STATUS;
 	#define __DHT_Temperature_Max	50
 	#define __DHT_Humidity_Min		20
 	#define __DHT_Humidity_Max		90
-	#define __DHT_Delay_Read		50
+	#define __DHT_Delay_Read		20
 #elif (DHT_Type == DHT22)
 	#define __DHT_Temperature_Min	-40
 	#define __DHT_Temperature_Max	80
